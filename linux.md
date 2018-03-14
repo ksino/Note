@@ -1,29 +1,29 @@
 [TOC]
 
-# Linuxé€šç”¨
+# LinuxÍ¨ÓÃ
 
-* ä¼ é€æ–‡ä»¶
+* ´«ËÍÎÄ¼ş
 `scp C:\Users\Administrator\Desktop\Temp\meizi\all_file kim@192.168.1.132:/home/kim/project/meizi/all_file`
 
-## æŸ¥çœ‹å†…å­˜
+## ²é¿´ÄÚ´æ
 * `free`
 * `top`
-* `htop`æ›´ç›´è§‚
+* `htop`¸üÖ±¹Û
 
-## å®‰è£…ZSH
+## °²×°ZSH
 
 ```
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-# é»˜è®¤å¯åŠ¨ZSH
+# Ä¬ÈÏÆô¶¯ZSH
 chsh -s /bin/zsh
 ```
-* é€šé…ç¬¦çš„Bug
+* Í¨Åä·ûµÄBug
 
 `find . -name *.h`
 `no matches found`
 
-* è§£å†³
+* ½â¾ö
 
 ```
 # vim ~/.zshrc 
@@ -34,15 +34,15 @@ source ~/.zshrc
 
 # Linux Deploy
 
-> åœ¨å®‰å“æ‰‹æœºä¸Šå®‰è£…Linuxç³»ç»Ÿ,ä½†æ˜¯å®‰è£…çš„ç³»ç»Ÿéœ€æ”¯æŒARMæ¶æ„.
-> å®‰è£…çš„centos-altarch,yumæºçš„æ”¯æŒä¸æ˜¯å¤ªå¥½.
+> ÔÚ°²×¿ÊÖ»úÉÏ°²×°LinuxÏµÍ³,µ«ÊÇ°²×°µÄÏµÍ³ĞèÖ§³ÖARM¼Ü¹¹.
+> °²×°µÄcentos-altarch,yumÔ´µÄÖ§³Ö²»ÊÇÌ«ºÃ.
 
-## å®‰è£…æ­¥éª¤
-1. é…ç½®æ–‡ä»¶
+## °²×°²½Öè
+1. ÅäÖÃÎÄ¼ş
 
-2. å®‰è£…
-3. å¯åŠ¨
-4. æ–‡ä»¶ä¼ è¾“
+2. °²×°
+3. Æô¶¯
+4. ÎÄ¼ş´«Êä
 `scp D:/Catalog/Django/maxone.zip kim@192.168.1.132:/home/kim/project`
 
 
@@ -50,8 +50,8 @@ source ~/.zshrc
 
 # Debian 9
 
-## [å®‰è£…æ˜¾å¡é©±åŠ¨](https://wiki.debian.org/AtiHowTo#AMD.2FATI_Open_Source_Drivers_.28amdgpu.2C_radeon.2C_r128.2C_mach64.29)
-æ–°å®‰è£…çš„ç³»ç»Ÿï¼Œå¹¶æ²¡æœ‰å®‰è£…é©±åŠ¨ï¼Œå‚è€ƒä»¥ä¸Šç½‘å€
+## [°²×°ÏÔ¿¨Çı¶¯](https://wiki.debian.org/AtiHowTo#AMD.2FATI_Open_Source_Drivers_.28amdgpu.2C_radeon.2C_r128.2C_mach64.29)
+ĞÂ°²×°µÄÏµÍ³£¬²¢Ã»ÓĞ°²×°Çı¶¯£¬²Î¿¼ÒÔÉÏÍøÖ·
 
 ```
 # Debian 8 "Jessie"
@@ -62,15 +62,15 @@ apt-get update
 apt-get install firmware-linux-nonfree libgl1-mesa-dri xserver-xorg-video-ati
 ```
 
-## ç›´æ¥å‘½ä»¤è¡Œå¯åŠ¨ç³»ç»Ÿ
+## Ö±½ÓÃüÁîĞĞÆô¶¯ÏµÍ³
 
-* å‚è€ƒ<https://www.cnblogs.com/qingkai/p/5443572.html>
+* ²Î¿¼<https://www.cnblogs.com/qingkai/p/5443572.html>
 
-* ä¿®æ”¹grubé¡¹
+* ĞŞ¸ÄgrubÏî
 
 `sudo nano /etc/default/grub`
 
-* ä¿®æ”¹å…¶ä¸­ä¸‰é¡¹
+* ĞŞ¸ÄÆäÖĞÈıÏî
 
 ```
 ...
@@ -80,7 +80,7 @@ GRUB_CMDLINE_LINUX=""
 #GRUB_TERMINAL=console
 ```
 
-ä¸º
+Îª
 
 ```
 ...
@@ -90,59 +90,69 @@ GRUB_CMDLINE_LINUX="text"
 GRUB_TERMINAL=console
 ```
 
-* æ›´æ–°grub
+* ¸üĞÂgrub
 `sudo update-grub`
 
-* è®¾ç½®systemd
+* ÉèÖÃsystemd
 `sudo systemctl set-default multi-user.target`
 
-* å¦‚æœè¦åˆ‡å›å›¾å½¢ç•Œé¢, åè½¬ä»¥ä¸Šæ­¥éª¤ï¼Œæ‰§è¡Œä¸€ä¸‹å‘½ä»¤
+* Èç¹ûÒªÇĞ»ØÍ¼ĞÎ½çÃæ, ·´×ªÒÔÉÏ²½Öè£¬Ö´ĞĞÒ»ÏÂÃüÁî
 
 `systemctl set-default graphical.target`
 
 * reboot
 
-## éŸ³é‡è°ƒèŠ‚
+## ÒôÁ¿µ÷½Ú
 
 `sudo alasmixter`
 
-* è®¾ç½®å¿«æ·é”®
+* ÉèÖÃ¿ì½İ¼ü
 ```
-å‡é«˜éŸ³é‡ï¼š  
+Éı¸ßÒôÁ¿£º  
 amixer set Master 5%+  
-é™ä½éŸ³é‡ï¼š  
+½µµÍÒôÁ¿£º  
 amixer set Master 5%-  
-é™éŸ³ï¼š  
+¾²Òô£º  
 amixer set Master toggle
 ```
-## è½¯ä»¶æº
+## Èí¼şÔ´
 
 * <https://www.debian.org/mirror/list>
 
 ```
 ftp2.cn.debian.org ftp.cn.debian.org mirror.lzu.edu.cn mirrors.163.com  mirrors.tuna.tsinghua.edu.cn mirrors.ustc.edu.cn mirrors.xjtu.edu.cn 
 ```
+* Ê¹ÓÃnetselect(ĞèÒª°²×°)²âÊÔËÙ¶È
 
-## rimeè¾“å…¥æ³•
+## rimeÊäÈë·¨
 `sudo apt install ibus-rime`
 `sudo apt install librime-data-double-pinyin`
 
-## å­—ä½“
+## ×ÖÌå
 
 * 
 `wget https://github.com/downloads/adobe-fonts/source-code-pro/SourceCodePro_FontsOnly-1.013.zip`
 
-* è§£å‹
+* ½âÑ¹
 `unzip SourceCodePro_FontsOnly-1.013.zip`
 
-* å¤åˆ¶
+* ¸´ÖÆ
 `cp -r ~/Downloads/SourceCodePro_FontsOnly-1.013/OTF/. ~/.fonts`
 
-* æ‰§è¡Œ
+* Ö´ĞĞ
 `fc-cache -f -v`
 
-* åœ¨ç»ˆç«¯ä¸­ä½¿ç”¨Source Code Pro å­—ä½“
+* ÔÚÖÕ¶ËÖĞÊ¹ÓÃSource Code Pro ×ÖÌå
 
-## æŸ¥çœ‹å·²å®‰è£…çš„è½¯ä»¶
+## ²é¿´ÒÑ°²×°µÄÈí¼ş
 
 `dpkg -l | grep soft-name`
+
+## ssh server
+```
+sudo  apt-get install openssh-server
+#ssh·şÎñ×´Ì¬
+ps -s|grep ssh
+#Æô¶¯·şÎñ
+service ssh start
+```

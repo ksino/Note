@@ -1,17 +1,20 @@
+[TOC]
+
 [虚拟机教程](http://blog.csdn.net/jaina_proudmoore/article/details/52589135)
+
 #Intall Arch Linux
 1. 分区
-1. 基本系统
-1. 图形画面
+2. 基本系统
+3. 图形画面
 ##一、分区
 1. 在VMware里开启虚拟机
-第一项是64位的，第二项是32位的，第三项是已有的系统。
-*Boot Arch Linux (x86_64)
-*Boot Arch linux (i686)
-*Boot existing OS
-1. 开始分区，输入命令。
-```# fdisk /dev/sda```
-创建分区表：
+  第一项是64位的，第二项是32位的，第三项是已有的系统。
+  *Boot Arch Linux (x86_64)
+  *Boot Arch linux (i686)
+  *Boot existing OS
+2. 开始分区，输入命令。
+  ```# fdisk /dev/sda```
+  创建分区表：
 ```
 · Command (m for help): 输入 o 并按下 Enter 
 然后建立第一个分区：
@@ -64,8 +67,8 @@ Syncing disks.
 ## 二、安装基本系统
 重申一遍，这里及以后一些步骤必须联网，尤其是运行pacman命令时。关于联网问题请参照archwiki,里面有十分详细的解说。
 2. 安装前需要编辑文件/etc/pacman.d/mirrorlist
-你的系统和软件将从这里的地址下载。将偏好的镜像放到最前面，下面加入了一个比较快的源，当然你可以去网上搜其他比较好的源：
-```# nano /etc/pacman.d/mirrorlist```
+  你的系统和软件将从这里的地址下载。将偏好的镜像放到最前面，下面加入了一个比较快的源，当然你可以去网上搜其他比较好的源：
+  ```# nano /etc/pacman.d/mirrorlist```
 ```
 ##
 ## Arch Linux repository mirrorlist
@@ -83,7 +86,7 @@ Server = `http://mirrors.bjtu.edu.cn/archlinux/$repo/os/$arch`
 ```
 # pacman -Syy          刷新列表
 # pacstrap -i /mnt base    安装基本系统
-``` 
+```
 若运行 pacstrap 时卡住并出现 failed retrieving file 'core.db' from mirror... : Connection time-out 字样，请检查刚才的源是否正确或去网上搜索其他能用的源。
 2. 生成fstab分区表
 ```
@@ -178,7 +181,7 @@ zh_TW.UTF-8 UTF-8
 # 虚拟机: pacman -S xf86-video-vesa
 ```
 安装声卡驱动键入
- 
+
 `# pacman -S alsa-utils`
 
 安装XFCE4 桌面套件
@@ -236,7 +239,7 @@ Numlock=on
 'kimolate ALL=(ALL) ALL'
 
 保存重启）
- 
+
 为了避免出现没有~/.xinitrc的情况，所以可以从系统中复制一个：
 `# cp /etc/skel/.xinitrc ~`
 （或者直接新建一个 #touch ~/.xinitrc）
@@ -255,7 +258,7 @@ Numlock=on
 ```
 添加 exec startxfce4或直接去掉你对应桌面的语句前面的#
 保存退出
- 
+
 添加执行权限
 `#sudo chmod +x ~/.xinitrc`
 最后设置自动启动slim登陆器
@@ -269,7 +272,7 @@ Numlock=on
 # export  LC_ALL="zh_CN.UTF-8"
 ```
 改.xprofile的，归根结底就是在启动xfce之前把环境变量LANG改成zh_CN.utf-8
- 
+
 接下来安装fcitx输入法
 `# sudo pacman -S fcitx-im fcitx-configtool`
 （如果你采用 KDM、GDM、LightDM 等显示管理器，请在~/.xprofile (没有则新建一个)中加入如下3行）如果你采用 startx 或者 Slim 启动 （即使用.xinitrc的场合），则在 ~/.xinitrc 中加入：
@@ -277,7 +280,7 @@ Numlock=on
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-```
+ ```
 重新登录后让环境变量生效。
 如果你使用 XDG 兼容的桌面环境如 KDE, GNOME, XFCE, LXDE, 当你重新登录后，Fcitx 应该会自动启动，如果没有的话，可以打开控制台并运行：
 `# fcitx`

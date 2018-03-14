@@ -1,15 +1,3 @@
-# [转行干货](https://zhuanlan.zhihu.com/p/22947919)
-* python核心编程
-* HTML5, CSS3, JavaScript, Bootstrap,W3school
-* sqlite Mysql Postgresql, MongoDB, Redis, Nginx
-* 大话数据结构
-* ubuntu, centos, 鸟哥linux私房菜
-* TCP/IP详解卷1 协议
-* TCP/IP 网络编程
-* HTTP权威指南
-* java核心技术
-* Google + stackoverflow
-
 # [Redis](https://redis.io/ "官网")
 * Reids 并不支持windows, [Lear More](https://github.com/MicrosoftArchive/redis)
 * download zip 后，建议放在D盘，C盘可能会因为权限的问题打不开文件
