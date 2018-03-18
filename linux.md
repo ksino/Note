@@ -1,14 +1,28 @@
 [TOC]
 
+# Linux安装
+
+## 分区方案
+
+* 考虑多个系统，
+
+|SWAP|home|扩展分区|
+|-|-|-|
+
+|扩展分区...|Debian/|CentOS/|Arch/ ...|
+|-|-|-|-|
+
 # Linux通用
 
-* 传送文件
+* 传送文件  
 `scp C:\Users\Administrator\Desktop\Temp\meizi\all_file kim@192.168.1.132:/home/kim/project/meizi/all_file`
 
 ## 查看内存
 * `free`
 * `top`
 * `htop`更直观
+
+# 效率类工具
 
 ## 安装ZSH
 
@@ -32,13 +46,23 @@ setopt no_nomatch
 source ~/.zshrc
 ```
 
-# Linux Deploy
+## tmux
+
+## vim
+
+# Linux Deploy on Andriod
 
 > 在安卓手机上安装Linux系统,但是安装的系统需支持ARM架构.
 > 安装的centos-altarch,yum源的支持不是太好.
 
 ## 安装步骤
 1. 配置文件
+     * 源地址
+       选择速度快一点，如中科大或者清华  
+       `https://mirror.tuna.tsinghua.edu.cn/archlinuxarm/`  
+     * 安装路径  
+       `/mnt/sdcard/linux/arch/arch.img/  # linux的文件夹就是再手机内存根目录下`
+
 
 2. 安装
 3. 启动
@@ -100,7 +124,9 @@ GRUB_TERMINAL=console
 
 `systemctl set-default graphical.target`
 
-* reboot
+* reboot  
+* 如果在命令行要进入x window，直接`startx`
+> 但建议`sudo systemctl start lightdm.servic`
 
 ## 音量调节
 
@@ -123,6 +149,7 @@ amixer set Master toggle
 ftp2.cn.debian.org ftp.cn.debian.org mirror.lzu.edu.cn mirrors.163.com  mirrors.tuna.tsinghua.edu.cn mirrors.ustc.edu.cn mirrors.xjtu.edu.cn 
 ```
 * 使用netselect(需要安装)测试速度
+> 可以使用netselect-apt的命令，直接生成速度最快软件源的sources.list
 
 ## rime输入法
 `sudo apt install ibus-rime`
@@ -156,3 +183,13 @@ ps -s|grep ssh
 #启动服务
 service ssh start
 ```
+## 刻录iso到U盘
+`dd bs=4M if=/home/debian/archlinux.iso of=/dev/sdb status=progress && sync`
+
+## 更改中文为英语
+`sudo vi /etc/default/locale`  
+```
+LANG="en_US.UTF-8"
+LANGUAGE="en_US:en"
+```
+`reboot`

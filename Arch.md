@@ -1,20 +1,23 @@
 [TOC]
 
-[虚拟机教程](http://blog.csdn.net/jaina_proudmoore/article/details/52589135)
 
 #Intall Arch Linux
-1. 分区
-2. 基本系统
-3. 图形画面
+[虚拟机教程](http://blog.csdn.net/jaina_proudmoore/article/details/52589135)
+
 ##一、分区
-1. 在VMware里开启虚拟机
-  第一项是64位的，第二项是32位的，第三项是已有的系统。
+1. 在VMware里开启虚拟机  
+  第一项是64位的，第二项是32位的，第三项是已有的系统。  
+  ```
   *Boot Arch Linux (x86_64)
   *Boot Arch linux (i686)
   *Boot existing OS
-2. 开始分区，输入命令。
-  ```# fdisk /dev/sda```
-  创建分区表：
+  ```
+
+2. 开始分区，输入命令。  
+`fdisk /dev/sda`
+
+* 创建分区表：  
+
 ```
 · Command (m for help): 输入 o 并按下 Enter 
 然后建立第一个分区：
@@ -42,43 +45,50 @@ Device Boot     Start         End     Blocks   Id  System
 然后向磁盘写入这些改动：
 · Command (m for help): 输入 w 并按下 Enter 
 ```
-如果一切顺利无错误的话，fdisk 程序将显示如下信息:
-The partition table has been altered!
-Calling ioctl() to re-read partition table.
-Syncing disks.
-若因 fdisk 遇到错误导致以上操作无法完成，可以用 q 命令来退出。
-（当然你也可以分多个分区，分别挂载/boot,/home/,/,/var等）
+
+如果一切顺利无错误的话，fdisk 程序将显示如下信息:  
+The partition table has been altered!  
+Calling ioctl() to re-read partition table.  
+Syncing disks.  
+若因 fdisk 遇到错误导致以上操作无法完成，可以用 q 命令来退出。  
+（当然你也可以分多个分区，分别挂载/boot,/home/,/,/var等）  
+
 1. 接下来格式化成ext4文件系统
 ```
-# mkfs.ext4 /dev/sda1
-# mkfs.ext4 /dev/sda2
+mkfs.ext4 /dev/sda1
+mkfs.ext4 /dev/sda2
 ```
-（ 若您分了一个 swap 区，也不要忘了格式化并启用它（x代表你的那个分区数字）：
+
+>  （ 若您分了一个 swap 区，也不要忘了格式化并启用它（x代表你的那个分区数字）：
 ```
 # mkswap /dev/sdaX
 # swapon /dev/sdaX
 ```
-注意要按照顺序挂载，先挂载根分区到 /mnt （你实际所要挂载的分区名当然可能会不同）：
-```# mount /dev/sda1 /mnt```
-然后挂载 /home 分区（以及其它其余单独分区，比如 /boot，/var，如果您有的话）：
-```# mkdir /mnt/home```
-```# mount /dev/sda2 /mnt/home```
-（如果有其他分区，先创建目录，再挂载）
+
+注意要按照顺序挂载，先挂载根分区到 /mnt （你实际所要挂载的分区名当然可能会不同）：  
+```mount /dev/sda1 /mnt```  
+然后挂载 /home 分区（以及其它其余单独分区，比如 /boot，/var，如果您有的话）：  
+```mkdir /mnt/home```  
+```mount /dev/sda2 /mnt/home```  
+（如果有其他分区，先创建目录，再挂载）  
+
 ## 二、安装基本系统
-重申一遍，这里及以后一些步骤必须联网，尤其是运行pacman命令时。关于联网问题请参照archwiki,里面有十分详细的解说。
-2. 安装前需要编辑文件/etc/pacman.d/mirrorlist
+
+重申一遍，这里及以后一些步骤必须联网，尤其是运行pacman命令时。关于联网问题请参照archwiki,里面有十分详细的解说。  
+2. 安装前需要编辑文件`/etc/pacman.d/mirrorlist`  
   你的系统和软件将从这里的地址下载。将偏好的镜像放到最前面，下面加入了一个比较快的源，当然你可以去网上搜其他比较好的源：
-  ```# nano /etc/pacman.d/mirrorlist```
+  `nano /etc/pacman.d/mirrorlist`
+
 ```
 ##
 ## Arch Linux repository mirrorlist
 ## Sorted by mirror score from mirror status page
 ## Generated on 2012-MM-DD
 ##
-```
-加入 
-Server = `http://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch`
-Server = `http://mirrors.bjtu.edu.cn/archlinux/$repo/os/$arch`
+```  
+加入  
+`Server=http://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch`  
+`Server=http://mirrors.bjtu.edu.cn/archlinux/$repo/os/$arch`
 
 
 如果您愿意，您可以只使用一个镜像并全删光其他行，但为保险，还是留其他几个离您较近的镜像作备用好
@@ -87,13 +97,14 @@ Server = `http://mirrors.bjtu.edu.cn/archlinux/$repo/os/$arch`
 # pacman -Syy          刷新列表
 # pacstrap -i /mnt base    安装基本系统
 ```
-若运行 pacstrap 时卡住并出现 failed retrieving file 'core.db' from mirror... : Connection time-out 字样，请检查刚才的源是否正确或去网上搜索其他能用的源。
-2. 生成fstab分区表
+若运行 pacstrap 时卡住并出现 `failed retrieving file 'core.db' from mirror... : Connection time-out` 字样，请检查刚才的源是否正确或去网上搜索其他能用的源。  
+2. 生成fstab分区表  
 ```
-# genfstab -U -p /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 ```
 生成完成之后必须查看一下fstab是否生成成功。
 `nano /mnt/etc/fstab`
+
 2. 下面要 chroot 到新系统开始配置：
 ```
 # arch-chroot /mnt /bin/bash
@@ -117,7 +128,7 @@ zh_TW.UTF-8 UTF-8
 ```
 这里先不要设置中文编码，等安装了图形界面再修改，否则会乱码）
 5、设置时区，一般以上海就行：
-`# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`
+`ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`
 6、设置时间
 `# hwclock --systohc --utc`
 7、设置个您喜欢的主机名，例如：
@@ -136,20 +147,25 @@ zh_TW.UTF-8 UTF-8
 # End of file
 ```
 8、设置root密码
+
 `# passwd`
+
 9、安装启动引导器grub:
-安装 grub 包，并执行 grub-install 已安装到 MBR:
-`# pacman -S grub`
-`# grub-install --target=i386-pc --recheck /dev/sda`
-`# grub-mkconfig -o /boot/grub/grub.cfg`
-须根据实际分区自行调整 /dev/sda, 切勿在块设备后附加数字，比如
-/dev/sda1 就不对
-10、卸载分区并重启系统
-离开 chroot 环境：
-`# exit`
-重启计算机：
-`# reboot`
+安装 grub 包，并执行 grub-install 已安装到 MBR:  
+须根据实际分区自行调整 /dev/sda, 切勿在块设备后附加数字，比如/dev/sda1 就不对
+```
+pacman -S grub
+grub-install --target=i386-pc --recheck /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+10、卸载分区并重启系统  
+离开 chroot 环境：  
+`exit`  
+重启计算机：  
+`reboot`  
 好了，一个最基本的字符系统建好了，接下来可以选择安装桌面等图形环境了。
+
 ##三、安装图形界面
 先进行网络设置，在上面的livecd中一般会自动联网
 `# ip link`
@@ -165,20 +181,20 @@ zh_TW.UTF-8 UTF-8
 ```# pacman -Syu```
 然后安装x window:
 ``` 
-#pacman -S xorg
-#pacman -S xterm
-#pacman -S xorg-xinit
+pacman -S xorg
+pacman -S xterm
+pacman -S xorg-xinit
 ```
 默认安装就行
-安装显卡驱动
+
+* 安装显卡驱动
 ```
-# pacman -S xf86-video-vesa # 通用显卡驱动，不提供任何2D和3D加速功能
-# pacman -S xf86-video-intel # Intel
-# pacman -S xf86-video-nouveau # Nvidia
-# pacman -S nouveau-dri
-# pacman -S xf86-video-ati # Ati
-#
-# 虚拟机: pacman -S xf86-video-vesa
+pacman -S xf86-video-vesa     # 通用显卡驱动，不提供任何2D和3D加速功能
+pacman -S xf86-video-intel    # Intel
+pacman -S xf86-video-nouveau  # Nvidia
+pacman -S nouveau-dri
+pacman -S xf86-video-ati      # Ati
+pacman -S xf86-video-vesa     # 虚拟机
 ```
 安装声卡驱动键入
 
@@ -198,6 +214,8 @@ xfce4是一个小巧但功能完备的桌面环境，比较适合配置较差的
 
 `systemctl enable sddm.service`
 
+安装lightDM和图形化管理工具
+`pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-se`
 配置显示管理器sddm
 
 安装完桌面之后，就可以配置显示管理器了。首先需要生成一个配置文件，
@@ -308,3 +326,38 @@ Linux命令行模式切换控制台，由图形转换到控制台模式：ctrl+a
 先安装Reflector
 `reflector --verbose --country 'china'-l 20 -p http --sort rate --save /etc/pacman.d/mirrorlist`
 pacman -Syy
+
+## 无线连接
+
+### 大致过程
+arch安装重启之后，是没有网络连接（大坑）！插上网线，dhcpcd总是连不上
+跟着<https://www.cnblogs.com/vachester/p/5637027.html>这份教程，
+因为共用home目录的原因，使用其他版本的linux下载相应如工具到本地
+`#iw dev wlan0 connect HIT-WLAN `  
+使用这个命令可以访问无密码的手机热点。
+下载networkmanager就可以连接wifi
+`nmcli dev wifi connect <name> password <password>`
+现在的解决办法是，netctl连接静态ip
+直接从`/etc/netctl/`的examples复制静态ip的配置文件
+```
+Description='A simple WPA encrypted wireless connection using a static IP'
+Interface=wlp2s0
+Connection=wireless
+Security=wpa
+ESSID='901'
+Key='qwert12345'
+IP=static
+Address='192.168.1.133/24'
+Gateway='192.168.1.1'
+DNS=('192.168.1.1')
+# Uncomment this if your ssid is hidden
+#Hidden=yes
+```  
+`netctl start wlp2s0-901  # 建立连接`  
+`netctl enable profwlp2s0-901ile  # 开机时自动启动配置文件`  
+`netctl reenable profile  # 创建开机服务`  
+
+感觉是dchpcd的问题，重新安装驱动，估计不用也可以
+
+ssh server
+`pacman -S openssh`
