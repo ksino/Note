@@ -19,7 +19,7 @@
 `git remote add origin git@github.com:ksino/maxone.git`
 
 * 推送到远程库
-
+`git push -u origin master`  
 > 第一次使用随便设置email, username
 
 ```
