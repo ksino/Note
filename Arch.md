@@ -1,7 +1,7 @@
 [TOC]
 
 
-#Intall Arch Linux
+# Intall Arch Linux
 [虚拟机教程](http://blog.csdn.net/jaina_proudmoore/article/details/52589135)
 
 ##一、分区
@@ -136,9 +136,7 @@ zh_TW.UTF-8 UTF-8
 并在 /etc/hosts 添加同样的主机名：
 `# nano /etc/hosts`
 ```
-#
-# /etc/hosts: static lookup table for host names
-#
+/etc/hosts: static lookup table for host names
  
 #<ip-address> <hostname.domain.org> <hostname>
 127.0.0.1    localhost.localdomain  localhost 主机名   
@@ -148,7 +146,7 @@ zh_TW.UTF-8 UTF-8
 ```
 8、设置root密码
 
-`# passwd`
+`passwd`
 
 9、安装启动引导器grub:
 安装 grub 包，并执行 grub-install 已安装到 MBR:  
@@ -162,11 +160,11 @@ grub-mkconfig -o /boot/grub/grub.cfg
 10、卸载分区并重启系统  
 离开 chroot 环境：  
 `exit`  
-重启计算机：  
+#重启计算机：  
 `reboot`  
 好了，一个最基本的字符系统建好了，接下来可以选择安装桌面等图形环境了。
 
-##三、安装图形界面
+## 三、安装图形界面
 先进行网络设置，在上面的livecd中一般会自动联网
 `# ip link`
 找到网络设备，我的是enp0s3
@@ -361,3 +359,28 @@ DNS=('192.168.1.1')
 
 ssh server
 `pacman -S openssh`
+
+## 安装ibus-rime输入法
+* 安装  
+> `pacman -S ibus-rime ibus-qt`  
+* 配置默认输入法  
+> `qtconfig-qt4`  
+  `Interface -> Default Input Method -> ibus`
+* 手工启动输入法  
+> `ibus-setup`  
+* 开机启动（应该是开X启动）
+> 
+``` 
+vim ~/.xprofile`
+# 输入一下代码
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -x -d
+# 如果存在~/.xinitrc，则需修改
+vim ~/.xinitrc
+# 添加如下代码
+# 执行.xinitrc之前，先执行.xprofile
+[ -f /etc/xprofile ] && source /etc/xprofile
+[ -f ~/.xprofile ] && source ~/.xprofile
+```
