@@ -383,4 +383,18 @@ vim ~/.xinitrc
 # 执行.xinitrc之前，先执行.xprofile
 [ -f /etc/xprofile ] && source /etc/xprofile
 [ -f ~/.xprofile ] && source ~/.xprofile
+```  
+* 设置
+> 
+```
+cd /usr/share/rime-data
+# 选择需要的输入法
+# github 克隆配置文件（个人）
+git clone git@github.com:ksino/rime.git
+# 将需要的文件复制到一下目录。
+# 一般是下面三个文件
+# default.custom.yaml
+# double_pinyin.custom.yaml
+# weasel.custom.yaml
+cd ~/.config/ibus/rime
 ```
